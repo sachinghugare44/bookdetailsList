@@ -1,0 +1,7 @@
+{
+  "name": "book-details",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

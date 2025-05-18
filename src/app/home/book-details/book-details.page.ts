@@ -1,26 +1,19 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
-import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonRow, IonCol, IonText, IonButton, IonIcon } from '@ionic/angular/standalone';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-book-details',
+  templateUrl: './book-details.page.html',
+  styleUrls: ['./book-details.page.scss'],
   standalone: true,
-   imports: [IonicModule,FormsModule,CommonModule]
-  //  imports: [IonicModule,IonFabButton, IonFab, IonButton, IonIcon, IonCard, IonFooter, IonCol, IonRow, IonText, IonTitle, IonContent, IonToolbar, IonHeader]
-
+  imports: [IonIcon, IonButton, IonText, IonCol, IonRow, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
+export class BookDetailsPage implements OnInit {
 
-export class HomePage implements OnInit {
-  loginisactive=true
-  constructor(private router:Router) {
-       setTimeout(() => {
-    this.isLoading = false;
-  }, 2000); 
+  constructor(private router:Router, private activated:ActivatedRoute ) { 
     if(localStorage.getItem('username')!=null && localStorage.getItem('password')!=null){
       this.loginisactive=true;
     }
@@ -29,44 +22,33 @@ export class HomePage implements OnInit {
        this.router.navigate(['/login-page'])
     }
   }
-  isLoading = true;
-  ngOnInit(): void {
-  //     setTimeout(() => {
-  //   this.isLoading = false;
-  // }, 2000); 
-  }
-  openbookdetails(book:any){
-    this.router.navigate(['/book-details/',book?.id])
-  }
- filteredBooks:any
-  searchText: any
-  onClickSearch(){
-    console.log(this.searchText);
-    if(this.searchText){
-    console.log(this.searchText)
-    // this.booksdetailsList=[]; 
+storedata:any
+  ngOnInit() {
+    this.bookid=this.activated.snapshot.paramMap.get('id')
+    console.log(this.bookid)
+this.getBookById(this.bookid);
 
-    const search = this.searchText.toLowerCase().trim();
 
-  this.booksdetailsList = this.booksdetailsList.filter(book =>
-    book.title?.toLowerCase().includes(search) ||
-    book.author?.toLowerCase().includes(search)
-   
-  );
-  // console.log(this.filteredBooks);
-   console.log(this.booksdetailsList);
-}
-else{
+  }
+bookid:any
+
+  backtologin(){
+    this.router.navigate(['/home'])
+  }
+  getBookById(id: any) {
+    
+    
+  for (let book of this.booksdetailsList) {
+    if (book.id == id) {
+      this.storedata=book
+      console.log(book)
+      return book;
+    }
+  }
+  return null;
 
 }
-    // this.filters.searchField=this.search
-    // this.getallEmponLeave();
-  }
-  clearSearch(){
-    this.searchText=[]
-    this.onClickSearch();
-  }
-  booksdetailsList = [
+   booksdetailsList = [
     {
       id:1,
       title: 'The Great Gatsby',
@@ -117,19 +99,10 @@ else{
       longDescription: 'This allegorical novel follows a young Andalusian shepherd named Santiago in his journey to the Egyptian pyramids in search of treasure and self-discovery.'
     }
   ];
-  logoutuser(){
-   this.router.navigate(['/login-page'])
+   logoutuser(){
     localStorage.clear();
-    
+    this.router.navigate(['/login-page'])
   }
-
-  // checkifloginnot(){
-  //   if(localStorage.getItem('username')!=null && localStorage.getItem('password')!=null){
-  //     this.loginisactive=true;
-  //   }
-  //   else{
-  //      this.loginisactive=false;
-  //      this.router.navigate(['/login-page'])
-  //   }
-  // }
+  loginisactive=true
+  
 }

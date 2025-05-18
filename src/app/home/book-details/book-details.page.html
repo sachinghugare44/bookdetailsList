@@ -1,0 +1,69 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="warning">
+    <ion-title>
+      <div class="row ">
+        <div class="col-9">
+          <ion-title><b>Book Details</b></ion-title>
+        </div>
+        <div class="col-3" >
+          <img width="40%" *ngIf="loginisactive" (click)="logoutuser()" style="margin-left: 20px;" src="assets/icon/poweroff.svg">
+        </div>
+      </div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row *ngIf="loginisactive">
+    <ion-col size="11" offset="0.5">
+      <br>
+      <div class="row text-center">
+        <div class="col">
+          <ion-title class="titledatas">{{storedata.title}}</ion-title>
+        </div>
+      </div>
+      <!-- <br> -->
+       <div class="row">
+        <div class="col">
+          <div class="imagediv">
+          <img  height="20%"  width="100%" src="assets/icon/noimageav.jpeg">
+          </div>
+        </div>
+      </div>
+      <br>
+     <div class="row p-1">
+        <div class="col">
+          <ion-title class="title">Author:</ion-title>
+          <p  class="titledata">{{storedata.author}}
+          </p>
+        </div>
+      </div>
+      <!-- <br> -->
+       <div class="row p-1">
+        <div class="col">
+          <ion-title class="title">Short Description:</ion-title>
+          <p  class="titledata">{{storedata.shortDescription}}
+          </p>
+        </div>
+      </div>
+        <div class="row p-1">
+        <div class="col">
+          <ion-title class="title">Long Description:</ion-title>
+          <p  class="titledata">{{storedata.longDescription}}
+          </p>
+        </div>
+      </div>
+      <br>
+        <div class="row text-center">
+          <div class="col">
+            <ion-button fill="clear" (click)="backtologin()" class="backbutton"><ion-icon style="color: black;" name="arrow-back-outline"></ion-icon> back to BookList</ion-button>
+          </div>
+        </div>
+      </ion-col>
+      </ion-row>
+      <ion-row *ngIf="!loginisactive">
+        <ion-col size="11" offset="0.5">
+          <h3 style="text-align: center;">Sorry ! You are LogOut..please Login</h3>
+        </ion-col>
+        </ion-row>
+</ion-content>

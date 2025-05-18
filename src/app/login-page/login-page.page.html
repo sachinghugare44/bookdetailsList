@@ -1,0 +1,93 @@
+<ion-header >
+  <ion-toolbar color="warning">
+   
+    <ion-title style="font-size: x-large; text-align: center;">
+      <b>Book Library</b> 
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <br> <br>
+  <ion-row>
+    <ion-col size="6">
+     <img height="100%" style="margin-left: 100px;"  src="assets/icon/hghf.png">
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <h2 style="text-align: center; font-weight: 900;">Login User</h2>
+    </ion-col>
+    </ion-row>
+<ion-row>
+  <ion-col>
+      <!-- <ion-title style="text-align: center;font-weight: 900;">Login Page</ion-title> -->
+      <form [formGroup]="LoginForm" (ngSubmit)="onSubmit(LoginForm)">
+            
+<ion-row>
+    <ion-col size="11" offset="0.5">
+
+                <ion-row>
+
+
+                  <ion-col>
+
+
+ <ion-input label="Username" minlength="3" label-placement="floating" formControlName="username" required
+                   style="background-color: white; border-radius: 8px;" fill="outline"   placeholder="Enter Username"
+                      [ngClass]="{ 'is-invalid': submittied && loginFormControl.username.errors }">
+                     </ion-input>
+                      <div *ngIf="submittied && loginFormControl.username.errors " class="invalid-feedback">
+                        <div
+                          *ngIf="loginFormControl.username.errors.required  || loginFormControl.username.touched ">
+                          Enter Username
+                        </div>
+                      </div>
+
+                  </ion-col>
+                </ion-row>
+                <hr>
+                <ion-row>
+
+                  <ion-col>
+                     <ion-input label="Password" label-placement="floating" formControlName="password" required
+                      style="background-color: white; border-radius: 8px;" fill="outline" minlength="6"
+                      [ngClass]="{ 'is-invalid': submittied && loginFormControl.password.errors }"
+                      placeholder="Enter Password"></ion-input>
+                      <div *ngIf="submittied && loginFormControl.password.errors " class="invalid-feedback">
+                        <div
+                          *ngIf="loginFormControl.password.errors.required  || loginFormControl.password.touched ">
+                          Enter password
+                        </div>
+                      </div>
+                    <br />
+
+
+                  </ion-col>
+                </ion-row>
+
+
+
+                <ion-row>
+                  <ion-col>
+                    <ion-button [disabled]="LoginForm?.invalid" size="medium" fill="clear" type="submit"  class="submit">Login</ion-button>
+                    <ion-text *ngIf="loginshow" style="color: red; ">Bad Credentials</ion-text>
+                  </ion-col>
+
+                </ion-row>
+                <!-- <ion-row>
+                  <ion-col size="8">
+                    <p style="color: white; ">Don't have Account ?</p>
+                  </ion-col>
+                  <ion-col size="4">
+                    <p   style="color: white; ">Register</p>
+                  </ion-col>
+                </ion-row> -->
+ </ion-col>
+  </ion-row>
+             
+          </form>
+
+  </ion-col>
+</ion-row>
+</ion-content>
